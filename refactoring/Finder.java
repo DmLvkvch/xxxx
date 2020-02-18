@@ -21,7 +21,7 @@ public class Finder {
      * @param targetAge возраст для поиска
      * @return список имен групп из списка групп старше возраста targetAge
      */
-    public static Set<String> findOldMembers(List<MembersGroup> groups, int targetAge) {
+    public Set<String> findOldMembers(List<MembersGroup> groups, int targetAge) {
         Set<String> groupsNames = groups.stream().
                 map(MembersGroup::getMembers).
                 flatMap(Collection::stream).
