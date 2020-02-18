@@ -23,8 +23,8 @@ public class Finder {
      */
     public static Set<String> findOldMembers(List<MembersGroup> groups, int targetAge) {
         Set<String> groupsNames = groups.stream().
-                map(membersGroup -> membersGroup.getMembers()).
-                flatMap(members -> members.stream()).
+                map(MembersGroup::getMembers).
+                flatMap(Collection::stream).
                 filter(member -> member.getAge() > targetAge).
                 map(Member::getName).collect(Collectors.toSet());
 
