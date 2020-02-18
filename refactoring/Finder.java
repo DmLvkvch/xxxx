@@ -17,7 +17,8 @@ public class Finder {
      */
     public Set<String> findGroupsWithOldMembers(List<MembersGroup> groups, int targetAge){
         Set<String> groupsName = groups.stream().
-                filter(group->group.getMembers().stream().allMatch(member -> member.getAge() > targetAge)).
+                filter(group->group.getMembers().stream().allMatch(member -> member.getAge() > targetAge)). //filtering groups
+                                                                                    // where each member in group older targetAge
                 map(MembersGroup::getGroupName).
                 collect(Collectors.toSet());
         return groupsName;
