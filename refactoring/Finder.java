@@ -11,16 +11,18 @@ public class Finder {
     /**
      * Поиск групп людей старше определенного возраста.
      *
-     * @return список имен групп из списка групп старше возраста targetAge
-     */
-
-    /**
-     * Поиск групп людей старше определенного возраста.
-     *
      * @param groups группы
      * @param targetAge возраст для поиска
      * @return список имен групп из списка групп старше возраста targetAge
      */
+    public Set<String> findGroupsWithOldMembers(List<MembersGroup> groups, int targetAge){
+        Set<String> groupsName = groups.stream().
+                filter(group->group.getMembers().stream().allMatch(member -> member.getAge() > targetAge)).
+                map(MembersGroup::getGroupName).
+                collect(Collectors.toSet());
+        return groupsName;
+    }
+
     public Set<String> findOldMembers(List<MembersGroup> groups, int targetAge) {
         Set<String> groupsNames = groups.stream().
                 map(MembersGroup::getMembers).
