@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>res/forts_startLogo.png</file>
+        <file>res/MainIcon.ico</file>
+        <file>res/skif_logo.png</file>
+    </qresource>
+</RCC>
