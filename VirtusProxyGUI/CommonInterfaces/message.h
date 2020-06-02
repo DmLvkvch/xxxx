@@ -28,16 +28,16 @@ public:
     Message();
     Message(QByteArray data, QDateTime time, QString description, QString sender, QString receiver, Format format);
     ~Message();
-    unsigned long id() const;///<получить id сообщения
-    QString status() const;///<получить статус сообщения
-    QString priority() const;///<получить приоритет сообщения
-    QByteArray data() const;///<получить данных из сообщения
-    QDateTime date() const;///<получить время
-    Format format() const;///<получить формат сообщения
-    QString caption() const;///<получить заголовок сообщения
-    QString description() const;///<получить описание сообщения
-    QString receiver() const;///<получить получателя сообщения
-    QString sender() const;///<получить отправителя сообщения
+    unsigned long id() const;///<РїРѕР»СѓС‡РёС‚СЊ id СЃРѕРѕР±С‰РµРЅРёСЏ
+    QString status() const;///<РїРѕР»СѓС‡РёС‚СЊ СЃС‚Р°С‚СѓСЃ СЃРѕРѕР±С‰РµРЅРёСЏ
+    QString priority() const;///<РїРѕР»СѓС‡РёС‚СЊ РїСЂРёРѕСЂРёС‚РµС‚ СЃРѕРѕР±С‰РµРЅРёСЏ
+    QByteArray data() const;///<РїРѕР»СѓС‡РёС‚СЊ РґР°РЅРЅС‹С… РёР· СЃРѕРѕР±С‰РµРЅРёСЏ
+    QDateTime date() const;///<РїРѕР»СѓС‡РёС‚СЊ РІСЂРµРјСЏ
+    Format format() const;///<РїРѕР»СѓС‡РёС‚СЊ С„РѕСЂРјР°С‚ СЃРѕРѕР±С‰РµРЅРёСЏ
+    QString caption() const;///<РїРѕР»СѓС‡РёС‚СЊ Р·Р°РіРѕР»РѕРІРѕРє СЃРѕРѕР±С‰РµРЅРёСЏ
+    QString description() const;///<РїРѕР»СѓС‡РёС‚СЊ РѕРїРёСЃР°РЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ
+    QString receiver() const;///<РїРѕР»СѓС‡РёС‚СЊ РїРѕР»СѓС‡Р°С‚РµР»СЏ СЃРѕРѕР±С‰РµРЅРёСЏ
+    QString sender() const;///<РїРѕР»СѓС‡РёС‚СЊ РѕС‚РїСЂР°РІРёС‚РµР»СЏ СЃРѕРѕР±С‰РµРЅРёСЏ
     static QString formatToString(Format format);
     QString dataToString() const;
 private:

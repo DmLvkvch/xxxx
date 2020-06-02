@@ -16,9 +16,9 @@ public:
     explicit ConnectionIFaceWidgetForm(ConnectionIFace & iface, QWidget *parent = nullptr);
     ~ConnectionIFaceWidgetForm();
 public slots:
-    void connection();
-    void msgIn();
-    void msgOut();
+    void connection();///<слот на изменение соединения
+    void msgIn();///<счетчик входящих сообщения
+    void msgOut();///<счетчик отправленных сообщения
 private:
     void initIFace();
     ConnectionIFace & _iface;

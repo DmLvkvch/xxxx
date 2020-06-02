@@ -12,7 +12,7 @@
 #include <QDirIterator>
 #include <QSharedPointer>
 #include <QString>
-
+#include <QPair>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(QString::fromLocal8Bit(tr("Виртус Прокси").toLocal8Bit().data()));
     _mnuBar  = new QMenuBar;
     _pmnu = new QMenu();
+    _widgetsLayout = new QGridLayout;
+    _central = new QWidget;
+    _scroll = new QScrollArea;
     _pmnu->setTitle(QString::fromLocal8Bit(tr("Меню").toLocal8Bit().data()));
     _pmnu->setVisible(true);
     _pmnu->addSeparator();
@@ -30,16 +33,16 @@ MainWindow::MainWindow(QWidget *parent)
     _pmnu->addAction("&"+QString::fromLocal8Bit(tr("Загрузить новый плагин").toLocal8Bit().data()), this, &MainWindow::handleLoadNewPlugin);
     _mnuBar->addMenu(_pmnu);
     setMenuBar(_mnuBar);
-    this->ui->centralwidget->setLayout(&_widgetsLayout);
+    this->ui->centralwidget->setLayout(_widgetsLayout);
     setUpPlugins();
-    scroll.setWidget(this->ui->centralwidget);
-    scroll.setWidgetResizable(true);
-    setCentralWidget(&scroll);
+    _scroll->setWidget(this->ui->centralwidget);
+    _scroll->setWidgetResizable(true);
+    setCentralWidget(_scroll);
 }
 
 void MainWindow::handleSettings()
 {
-    _settings = (new MainWindowSettings(_widgetsLayout.count()));
+    _settings = (new MainWindowSettings(_widgetsLayout->count()));
     QObject::connect(_settings, &MainWindowSettings::gridChanged, this, &MainWindow::handleGridChanged);
     _settings->show();
 }
@@ -62,9 +65,6 @@ void MainWindow::setUpPlugins()
     {
         if (finfo.suffix() == extension)
         {
-            loadNewPlugin(finfo.absoluteFilePath());
-            loadNewPlugin(finfo.absoluteFilePath());
-            loadNewPlugin(finfo.absoluteFilePath());
             loadNewPlugin(finfo.absoluteFilePath());
         }
     }
@@ -97,10 +97,10 @@ void MainWindow::loadNewPlugin(QString path)
         return;
     }
 
-    typedef PluginIFace *(*createPlugin)();
+    //typedef PluginIFace *(*createPlugin)();
     createPlugin cwf = (createPlugin)lib.resolve("create");
-//    typedef void (*deletePlugin)(PluginIFace*);
-//    deletePlugin qwe = (deletePlugin)lib.resolve("deletePlugin");
+    //typedef void (*deletePlugin)(PluginIFace*);
+    deletePlugin zxc = (deletePlugin)lib.resolve("deletePlugin");
     if (cwf)
     {
         PluginIFace *plugin = cwf();
@@ -108,6 +108,7 @@ void MainWindow::loadNewPlugin(QString path)
         {
             PluginWidgetForm *pw = new PluginWidgetForm(plugin);
             pluginList.push_back(pw);
+            plugins.push_back(QPair<deletePlugin, PluginIFace*>(zxc, plugin));
             this->ui->centralwidget->layout()->addWidget(pw);
         }
     }
@@ -120,22 +121,22 @@ void MainWindow::loadNewPlugin(QString path)
 void MainWindow::handleGridChanged(int rows, int columns)
 {
     int k = 0;
-    for (int i = 0;i<_widgetsLayout.rowCount();i++)
+    for (int i = 0;i< _widgetsLayout->rowCount(); i++)
     {
-        for(int j = 0;j<_widgetsLayout.columnCount();j++)
+        for(int j = 0;j< _widgetsLayout->columnCount(); j++)
         {
-            _widgetsLayout.removeItem(_widgetsLayout.itemAtPosition(i, j));
+            _widgetsLayout->removeItem(_widgetsLayout->itemAtPosition(i, j));
         }
     }
-    for (int i = 0; i<rows; i++)
+    for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j<columns; j++)
+        for (int j = 0; j < columns; j++)
         {
-            if(k==pluginList.size())
+            if(k == pluginList.size())
             {
                 return;
             }
-            _widgetsLayout.addWidget(pluginList.at(k), i, j);
+            _widgetsLayout->addWidget(pluginList.at(k), i, j);
             k++;
         }
     }
@@ -147,11 +148,13 @@ void MainWindow::handleLoadNewPlugin()
     QString fileName = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit(tr("Загрузить плагин").toLocal8Bit().data()), QString(),
                                                     tr("Files (*.dll *.so)"));
     loadNewPlugin(fileName);
-    handleGridChanged(_widgetsLayout.rowCount(), _widgetsLayout.columnCount());
+    handleGridChanged(_widgetsLayout->rowCount(), _widgetsLayout->columnCount());
 }
 
 MainWindow::~MainWindow()
 {
+    foreach (auto& tmp, plugins) {
+        tmp.first(tmp.second);
+    }
     delete ui;
 }
-

@@ -9,21 +9,22 @@
 #include <QSpinBox>
 #include <QStyleOption>
 #include <QVBoxLayout>
-#include <iostream>
-
 
 SettingsWidget::SettingsWidget(QList<QSharedPointer<ConnectionIFace>> & ifaces): QWidget(nullptr)
 {
+    _saveButton = new QPushButton;
+    _layout = new QVBoxLayout;
+    _buttonsLayout = new QHBoxLayout;
     this->_ifaces = ifaces;
     this->setWindowTitle(QString::fromLocal8Bit(tr("Настройки").toLocal8Bit().data()));
-    _saveButton = QSharedPointer<QPushButton>( new QPushButton());
+    //_saveButton = QSharedPointer<QPushButton>( new QPushButton());
     _saveButton->setText(QString::fromLocal8Bit(tr("Сохранить").toLocal8Bit().data()));
-    _layout = QSharedPointer<QVBoxLayout>(new QVBoxLayout());
-    _buttonsLayout = QSharedPointer<QHBoxLayout>(new QHBoxLayout());
-    setLayout(_layout.data());
-    _buttonsLayout->addWidget(_saveButton.data());
+    //_layout = QSharedPointer<QVBoxLayout>(new QVBoxLayout());
+    //_buttonsLayout = QSharedPointer<QHBoxLayout>(new QHBoxLayout());
+    setLayout(_layout);
+    _buttonsLayout->addWidget(_saveButton);
     init();
-    _layout->addLayout(_buttonsLayout.data());
+    _layout->addLayout(_buttonsLayout);
 }
 
 SettingsWidget::~SettingsWidget()

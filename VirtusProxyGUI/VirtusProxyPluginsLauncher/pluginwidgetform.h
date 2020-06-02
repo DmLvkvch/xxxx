@@ -18,12 +18,12 @@ public:
 private slots:
     void handleStart();
     void initIFaces();
-    void on__messages_clicked();
+    void handleOnLogsClicked();
 
-    void on__settings_clicked();
+    void handleOnSettingsClicked();
 
 private:
-    PluginIFace* _plugin;
+    PluginIFace* _plugin = nullptr;
     Ui::PluginWidgetForm *ui;
 };
 

@@ -9,11 +9,13 @@ MainWindowSettings::MainWindowSettings(int count, QWidget *parent) :
 {
     this->_pluginCount = count;
     ui->setupUi(this);
+    QObject::connect(ui->_save, &QPushButton::clicked,
+                     this, &MainWindowSettings::handleSaveSettings);
     initComboBox();
     QObject::connect(ui->comboBox, &QComboBox::currentTextChanged,
-                     this, &MainWindowSettings::on__rowComboBox_currentIndexChanged);
-    QObject::connect(ui->comboBox, &QComboBox::currentTextChanged,
-                     this, &MainWindowSettings::on__rowComboBox_currentIndexChanged);
+                     this, &MainWindowSettings::handleRowComboBoxChanged);
+    QObject::connect(ui->comboBox_2, &QComboBox::currentTextChanged,
+                     this, &MainWindowSettings::handleColumnComboBoxChanged);
 }
 
 void MainWindowSettings::initComboBox()
@@ -36,7 +38,7 @@ MainWindowSettings::~MainWindowSettings()
 }
 
 
-void MainWindowSettings::on__save_clicked()
+void MainWindowSettings::handleSaveSettings()
 {
     int i = ui->comboBox->currentText().toInt();
     int j = ui->comboBox_2->currentText().toInt();
@@ -44,7 +46,7 @@ void MainWindowSettings::on__save_clicked()
 
 }
 
-void MainWindowSettings::on__rowComboBox_currentIndexChanged(const QString &arg1)
+void MainWindowSettings::handleRowComboBoxChanged(const QString &arg1)
 {
     ui->comboBox_2->clear();
     int rows = arg1.toInt();
@@ -54,7 +56,7 @@ void MainWindowSettings::on__rowComboBox_currentIndexChanged(const QString &arg1
     }
 }
 
-void MainWindowSettings::on__columnComboBox_currentIndexChanged(const QString &arg1)
+void MainWindowSettings::handleColumnComboBoxChanged(const QString &arg1)
 {
     ui->comboBox->clear();
     int cols = arg1.toInt();

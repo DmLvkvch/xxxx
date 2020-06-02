@@ -27,6 +27,7 @@ FortisConnection::FortisConnection(QUrl url):ConnectionIFace(tr("Фортис"),
                 this, &FortisConnection::disconnected,
                 Qt::UniqueConnection);
     setIconPath(":/images/res/forts_startLogo.png");
+
 }
 
 void FortisConnection::connect()
@@ -97,6 +98,7 @@ void FortisConnection::onConnected()
             this, &FortisConnection::onTextMessageReceived,
                                     Qt::UniqueConnection);
     getDrones();
+    subscribeToPingMicroservices();
 }
 
 void FortisConnection::getDrones()
@@ -187,7 +189,7 @@ void FortisConnection::subscribeToPingMicroservices()
     foreach (int droneNum, _drones)
     {
         QVariantMap msg;
-        msg.insert("path","/DroneCollectionModel/" + QString::number(droneNum) + "/DronePing");
+        msg.insert("path",this->name());
         msg.insert("command","subscribe");
         QVariantMap message;
         message.insert("servicepath","/GlobalCommander");
@@ -201,7 +203,7 @@ void FortisConnection::subscribeToPingMicroservices()
         QJsonDocument doc(QJsonObject::fromVariantMap(msg));
         _webSocket->sendTextMessage(doc.toJson());
         Message m(doc.toBinaryData(), QDateTime::currentDateTime(), "", this->name(),
-                  "/DroneCollectionModel/" + QString::number(droneNum) + "/DronePing", Message::Format::Json);
+                  this->name(), Message::Format::Json);
         send(m);
     }
 }

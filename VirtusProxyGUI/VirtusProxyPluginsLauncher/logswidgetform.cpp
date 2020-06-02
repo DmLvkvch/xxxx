@@ -8,6 +8,7 @@ LogsWidgetForm::LogsWidgetForm(const QList<Message> & logs, QWidget *parent) :
     ui(new Ui::LogsWidgetForm)
 {
     ui->setupUi(this);
+    this->setWindowTitle(tr("Сообщения"));
     this->ui->logsTable->setColumnCount(static_cast<int>(LogsColumns::ColumnsNum));
     this->ui->logsTable->setHorizontalHeaderLabels(getLogsTableHeader());
     QHeaderView *header = this->ui->logsTable->horizontalHeader();
@@ -35,44 +36,44 @@ void LogsWidgetForm::appendRow(Message message)
     for (int i = 0; i < int(LogsColumns::ColumnsNum); ++i)
     {
         QString item;
-        switch (i)
+        LogsColumns column = static_cast<LogsColumns>(i);
+        switch (column)
         {
-        case static_cast<int>(LogsColumns::Id):
+        case LogsColumns::Id:
             item = QString::number(message.id());
             break;
-        case static_cast<int>(LogsColumns::Date):
+        case LogsColumns::Date:
             item = message.date().toString();
             break;
-        case static_cast<int>(LogsColumns::Sender):
+        case LogsColumns::Sender:
             item = message.sender();
             break;
-        case static_cast<int>(LogsColumns::Receiver):
+        case LogsColumns::Receiver:
             item = message.receiver();
             break;
-        case static_cast<int>(LogsColumns::Status):
+        case LogsColumns::Status:
             item = message.status();
             break;
-        case static_cast<int>(LogsColumns::Caption):
+        case LogsColumns::Caption:
             item = message.caption();
             break;
-        case static_cast<int>(LogsColumns::Description):
+        case LogsColumns::Description:
             item = message.description();
             break;
-        case static_cast<int>(LogsColumns::Priority):
+        case LogsColumns::Priority:
             item = message.priority();
             break;
-        case static_cast<int>(LogsColumns::Format):
+        case LogsColumns::Format:
             item = Message::formatToString(message.format());
             break;
-        case static_cast<int>(LogsColumns::Data):
+        case LogsColumns::Data:
             item = QString::fromStdString(message.data().toStdString());
+            break;
+        default:
             break;
         }
         this->ui->logsTable->setItem(this->ui->logsTable->rowCount()-1, i, new QTableWidgetItem(item));
     }
-    update();
-    qDebug()<<"append";
-
 }
 
 

@@ -17,31 +17,31 @@ class COMMONINTERFACES_EXPORT PluginIFace: public QObject
     Q_OBJECT
 public:
     /*!
-      * \brief Конструктор объекта класса PluginIFace
-      * инициализирует все настройки плагина
+      * \brief РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РѕР±СЉРµРєС‚Р° РєР»Р°СЃСЃР° PluginIFace
+      * РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ РІСЃРµ РЅР°СЃС‚СЂРѕР№РєРё РїР»Р°РіРёРЅР°
       */
     PluginIFace(QString _name, QString _version, QIcon _icon);
-    QString name() const;///<Название плагина
-    QList<QSharedPointer<ConnectionIFace>> & connectedIFaces();///<список подключенных интерфейсов
-    QString version() const;///<версия плагина
-    QList<Message> messageList();///<список сообщений
-    QString id();///<id плагина
-    virtual void start() = 0;///<запуск плагина
-    QIcon icon();///<икнока плагина
+    QString name() const;///<РќР°Р·РІР°РЅРёРµ РїР»Р°РіРёРЅР°
+    QList<QSharedPointer<ConnectionIFace>> & connectedIFaces();///<СЃРїРёСЃРѕРє РїРѕРґРєР»СЋС‡РµРЅРЅС‹С… РёРЅС‚РµСЂС„РµР№СЃРѕРІ
+    QString version() const;///<РІРµСЂСЃРёСЏ РїР»Р°РіРёРЅР°
+    QList<Message> messageList();///<СЃРїРёСЃРѕРє СЃРѕРѕР±С‰РµРЅРёР№
+    QString id();///<id РїР»Р°РіРёРЅР°
+    virtual void start() = 0;///<Р·Р°РїСѓСЃРє РїР»Р°РіРёРЅР°
+    QIcon icon();///<РёРєРЅРѕРєР° РїР»Р°РіРёРЅР°
     virtual ~PluginIFace();
 protected:
-    void addConnectionIFace(ConnectionIFace* iface);///<добавить новый интерфейс
+    void addConnectionIFace(ConnectionIFace* iface);///<РґРѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ РёРЅС‚РµСЂС„РµР№СЃ
     QList<QSharedPointer<ConnectionIFace>> _connectedIFaces;
 signals:
-    void connectedIFace(QSharedPointer<ConnectionIFace> iface); ///<уведомление о подключении нового интерфейса
-    void disconnectedIFace(QSharedPointer<ConnectionIFace> iface); ///<уведомление об отключении интерфейса
-    void received(const Message & message);///<уведомление о получении сообщения
-    void sended(const Message & message);///<уведомление об отправке сообщения
+    void connectedIFace(QSharedPointer<ConnectionIFace> iface); ///<СѓРІРµРґРѕРјР»РµРЅРёРµ Рѕ РїРѕРґРєР»СЋС‡РµРЅРёРё РЅРѕРІРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР°
+    void disconnectedIFace(QSharedPointer<ConnectionIFace> iface); ///<СѓРІРµРґРѕРјР»РµРЅРёРµ РѕР± РѕС‚РєР»СЋС‡РµРЅРёРё РёРЅС‚РµСЂС„РµР№СЃР°
+    void received(const Message & message);///<СѓРІРµРґРѕРјР»РµРЅРёРµ Рѕ РїРѕР»СѓС‡РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёСЏ
+    void sended(const Message & message);///<СѓРІРµРґРѕРјР»РµРЅРёРµ РѕР± РѕС‚РїСЂР°РІРєРµ СЃРѕРѕР±С‰РµРЅРёСЏ
     void connectionIFaceChanged();
 private slots:
-    void messageReceived(const Message & message);
-    void messageSended(const Message & message);
-    void change();
+    void messageReceived(const Message & message);///<СЃР»РѕС‚ РЅР° РїРѕР»СѓС‡РµРЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёСЏ
+    void messageSended(const Message & message);///<СЃР»РѕС‚ РЅР° РѕС‚РїСЂР°РІР»РµРЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёСЏ
+    void change();///<РЅРµ РЅСѓР¶РµРЅ,
 private:
     QString _name;
     QString _version;

@@ -18,18 +18,18 @@ public:
         Unknown, Connected, Disconnected
     };
     /*!
-      * \brief Конструктор объекта класса ConnectionIFace
-      * инициализирует все настройки подключенного интерфейса
+      * \brief РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РѕР±СЉРµРєС‚Р° РєР»Р°СЃСЃР° ConnectionIFace
+      * РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ РІСЃРµ РЅР°СЃС‚СЂРѕР№РєРё РїРѕРґРєР»СЋС‡РµРЅРЅРѕРіРѕ РёРЅС‚РµСЂС„РµР№СЃР°
       */
     ConnectionIFace(QString _name, QList<SettingsItem> _settings);
-    QString name() const;///<имя интерфейса
-    Status status() const;///<статус интерфейса
-    void setSettings(const QList<SettingsItem> & settings);///<установить настройки интерфеса
-    QList<SettingsItem> & settings();///<получить настройки
-    QList<Message> & messageList();///<список сообщений
+    QString name() const;///<РёРјСЏ РёРЅС‚РµСЂС„РµР№СЃР°
+    Status status() const;///<СЃС‚Р°С‚СѓСЃ РёРЅС‚РµСЂС„РµР№СЃР°
+    void setSettings(const QList<SettingsItem> & settings);///<СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РёРЅС‚РµСЂС„РµСЃР°
+    QList<SettingsItem> & settings();///<РїРѕР»СѓС‡РёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё
+    QList<Message> & messageList();///<СЃРїРёСЃРѕРє СЃРѕРѕР±С‰РµРЅРёР№
     QIcon icon() const;
-    virtual void send(const Message & message) = 0;///<отправить сообщение
-    virtual void receive(const Message & message) = 0;///<получение сообщения
+    virtual void send(const Message & message) = 0;///<РѕС‚РїСЂР°РІРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ
+    virtual void receive(const Message & message) = 0;///<РїРѕР»СѓС‡РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ
     virtual void connect() = 0;
     virtual ~ConnectionIFace();
 private slots:

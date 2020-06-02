@@ -16,18 +16,18 @@ public:
     ~LogsWidgetForm();
     void resizeEvent(QResizeEvent *event);
 public slots:
-    void appendRow(Message message);
+    void appendRow(Message message);///<добавление строки в конец таблицы
 private:
-    QString getLogsColumnName(const int& index);
-    QStringList getLogsTableHeader();
-    int getLogsTableColumnIndex(const QString& name);
+    QString getLogsColumnName(const int& index);///<имя колонки по индексу
+    QStringList getLogsTableHeader();///<список колонок
+    int getLogsTableColumnIndex(const QString& name);///<индекс колонки по названию
     void fillTable();
     const QList<Message> & _logs;
     enum class LogsColumns : int
     {
         Id,
-        Receiver,
         Sender,
+        Receiver,
         Date,
         Status,
         Priority,

@@ -1,7 +1,7 @@
 #include "connectioniface.h"
 #include "message.h"
 #include "pluginiface.h"
-
+#include <QDebug>
 PluginIFace::PluginIFace(QString _name, QString _version, QIcon _icon):QObject(nullptr)
 {
     this->_version = _version;
@@ -11,7 +11,7 @@ PluginIFace::PluginIFace(QString _name, QString _version, QIcon _icon):QObject(n
 
 PluginIFace::~PluginIFace()
 {
-    this->_connectedIFaces.clear();
+
 }
 
 QList<Message> PluginIFace::messageList()
@@ -52,7 +52,7 @@ QIcon PluginIFace::icon(){
 
 void PluginIFace::change()
 {
-    emit connectionIFaceChanged();
+   // emit connectionIFaceChanged();
 }
 
 void PluginIFace::messageReceived(const Message & message)

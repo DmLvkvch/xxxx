@@ -2,10 +2,9 @@
 #define FORTISCONNECTION_H
 
 #include "connectioniface.h"
-class SettingsItem;
 #include <QWebSocket>
 #include <QUrl>
-
+class SettingsItem;
 class FortisConnection:public ConnectionIFace
 {
     Q_OBJECT

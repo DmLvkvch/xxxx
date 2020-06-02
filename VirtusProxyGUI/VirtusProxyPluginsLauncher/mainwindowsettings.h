@@ -18,11 +18,9 @@ signals:
     void gridChanged(int , int);
 
 private slots:
-    void on__save_clicked();
-
-    void on__rowComboBox_currentIndexChanged(const QString &arg1);
-
-    void on__columnComboBox_currentIndexChanged(const QString &arg1);
+    void handleSaveSettings();
+    void handleRowComboBoxChanged(const QString &arg1);
+    void handleColumnComboBoxChanged(const QString &arg1);
 
 private:
     void initComboBox();

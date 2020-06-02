@@ -15,19 +15,19 @@ class SettingsWidget: public QWidget
     Q_OBJECT
 public:
     /*!
-      * \brief Конструктор объекта класса SettingsWidget
-      * принимает на вход список интерфейсов
+      * \brief РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РѕР±СЉРµРєС‚Р° РєР»Р°СЃСЃР° SettingsWidget
+      * РїСЂРёРЅРёРјР°РµС‚ РЅР° РІС…РѕРґ СЃРїРёСЃРѕРє РёРЅС‚РµСЂС„РµР№СЃРѕРІ
       */
     SettingsWidget(QList<QSharedPointer<ConnectionIFace>> & ifaces);
     void paintEvent(QPaintEvent * e);
     ~SettingsWidget();
 private slots:
-    void saveSettings();///<сохранение настроек
+    void saveSettings();///<СЃРѕС…СЂР°РЅРµРЅРёРµ РЅР°СЃС‚СЂРѕРµРє
 private:
     void init();
-    QSharedPointer<QVBoxLayout> _layout;
-    QSharedPointer<QHBoxLayout> _buttonsLayout;
-    QSharedPointer<QPushButton> _saveButton;
+    QVBoxLayout* _layout;
+    QHBoxLayout* _buttonsLayout;
+    QPushButton* _saveButton;
     QList<QSharedPointer<ConnectionIFace>> _ifaces;
 };
 

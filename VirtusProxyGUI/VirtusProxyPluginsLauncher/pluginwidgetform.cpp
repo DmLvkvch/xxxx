@@ -20,6 +20,8 @@ PluginWidgetForm::PluginWidgetForm(PluginIFace* plugin, QWidget *parent) :
     {
         ui->_connectionIFacesLayout->addWidget(new ConnectionIFaceWidgetForm(*iface));
     }
+    QObject::connect(ui->_messages, &QPushButton::clicked, this, &PluginWidgetForm::handleOnLogsClicked);
+    QObject::connect(ui->_settings, &QPushButton::clicked, this, &PluginWidgetForm::handleOnSettingsClicked);
     handleStart();
 }
 
@@ -49,7 +51,7 @@ PluginWidgetForm::~PluginWidgetForm()
 
 }
 
-void PluginWidgetForm::on__messages_clicked()
+void PluginWidgetForm::handleOnLogsClicked()
 {
     LogsWidgetForm* l = new LogsWidgetForm(_plugin->messageList());
     QObject::connect(_plugin, &PluginIFace::received, l, &LogsWidgetForm::appendRow);
@@ -57,7 +59,7 @@ void PluginWidgetForm::on__messages_clicked()
     l->show();
 }
 
-void PluginWidgetForm::on__settings_clicked()
+void PluginWidgetForm::handleOnSettingsClicked()
 {
     SettingsWidget* s = new SettingsWidget(this->_plugin->connectedIFaces());
     s->show();
