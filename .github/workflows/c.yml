@@ -20,8 +20,6 @@ jobs:
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
-    - name: Setup
-      uses: actions/install-qt-action@v2
       with:
         version: '5.12.9'
         host: 'linux'
