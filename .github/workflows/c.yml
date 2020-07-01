@@ -29,9 +29,6 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v2
-      with:
         version: '5.12.9'
         host: 'linux'
         target: 'desktop'
