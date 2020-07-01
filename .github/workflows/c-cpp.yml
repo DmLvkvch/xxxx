@@ -33,5 +33,6 @@ jobs:
         extra: '--external 7z'
     - run: ls
     - run: pwd
+    - run: cd VirtusProxyGUI
     - run: qmake -makefile
     - run: make
