@@ -15,6 +15,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v.2.0.0
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2.7.2
+      uses: jurplel/install-qt-action@v2
       with:
-        submodule_update: ON
+        version: '5.12.9'
+        host: 'linux'
+        target: 'desktop'
+        dir: '${{ github.workspace }}/example/'
+        install-deps: 'true'
+        modules: 'qtcharts qtwebengine'
+        mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
+        cached: 'false'
+        aqtversion: '==0.9'
+        py7zrversion: '==0.7'
+        extra: '--external 7z'
