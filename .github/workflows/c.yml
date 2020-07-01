@@ -45,5 +45,6 @@ jobs:
     - run: ls
     - run: pwd
     - run: cd VirtusProxyGUI
+    - run: ls
     - run: qmake "CONFIG+=VirtusProxyGUI" VirtusProxyGUI.pro
     - run: make
