@@ -28,7 +28,7 @@ jobs:
         dir: '${{ github.workspace }}/example/'
         install-deps: 'true'
         mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
-        cached: 'false'
+        cached: 'true'
         aqtversion: '==0.9'
         py7zrversion: '==0.7'
         extra: '--external 7z'
