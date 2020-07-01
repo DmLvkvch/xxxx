@@ -33,5 +33,5 @@ jobs:
         extra: '--external 7z'
     - run: ls
     - run: pwd
-    - run: qmake -makefile -project
+    - run: qmake -makefile
     - run: make
