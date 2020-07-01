@@ -34,5 +34,5 @@ jobs:
     - run: ls
     - run: pwd
     - run: cd VirtusProxyGUI
-    - run: qmake -makefile
+    - run: qmake
     - run: make
