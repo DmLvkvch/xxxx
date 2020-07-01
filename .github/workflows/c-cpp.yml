@@ -22,7 +22,6 @@ jobs:
         target: 'desktop'
         dir: '${{ github.workspace }}/example/'
         install-deps: 'true'
-        modules: 'qtcharts qtwebengine'
         mirror: 'http://mirrors.ocf.berkeley.edu/qt/'
         cached: 'false'
         aqtversion: '==0.9'
