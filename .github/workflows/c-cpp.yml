@@ -27,3 +27,5 @@ jobs:
         aqtversion: '==0.9'
         py7zrversion: '==0.7'
         extra: '--external 7z'
+    - run: qmake
+    - run: make
